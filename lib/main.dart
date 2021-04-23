@@ -3,7 +3,7 @@ import 'package:bidding_app/screens/home/homepage.dart';
 import 'package:bidding_app/screens/onboarding.dart';
 import 'package:bidding_app/services/auth.dart';
 import 'package:bidding_app/services/userDbService.dart';
-import 'package:bidding_app/utils/router.dart' as R;
+import 'package:bidding_app/utils/routing/router.dart' as R;
 import 'package:bidding_app/utils/size_config.dart';
 import 'package:bidding_app/utils/theme.dart';
 import 'package:bidding_app/widgets/commonUI/AppStreamBuilder.dart';
@@ -52,7 +52,9 @@ class _StreamedAppState extends State<StreamedApp> {
       key: _key,
       child: StreamProvider<AppUser>.value(
         // initialData: AppUser(),
-        value: UserDBServices().streamData(context.watch<User>()?.uid),
+        value: context.watch<User>() != null
+            ? UserDBServices().streamData(context.watch<User>()?.uid)
+            : null,
         child: MyApp(),
       ),
     );

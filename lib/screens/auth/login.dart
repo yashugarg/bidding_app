@@ -3,7 +3,7 @@ import 'package:bidding_app/screens/home/homepage.dart';
 import 'package:bidding_app/services/auth.dart';
 import 'package:bidding_app/services/firebase_messaging.dart';
 import 'package:bidding_app/services/userDbService.dart';
-import 'package:bidding_app/utils/RoutingUtils.dart';
+import 'package:bidding_app/utils/routing/RoutingUtils.dart';
 import 'package:bidding_app/utils/constants.dart';
 import 'package:bidding_app/utils/keyboard.dart';
 import 'package:bidding_app/utils/size_config.dart';
@@ -18,6 +18,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool obscurePassword = true;
+
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController emailTextController = new TextEditingController();
@@ -55,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
       var user = await authService.loginUser(
           email: emailTextController.text,
           password: passwordTextController.text);
-      _navigate(user);
+      if (user != null) _navigate(user);
     } catch (e) {
       showDialog(
           context: context,
@@ -187,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
-      obscureText: true,
+      obscureText: obscurePassword,
       controller: passwordTextController,
       validator: (value) {
         if (value!.isEmpty) {
@@ -201,7 +203,19 @@ class _LoginPageState extends State<LoginPage> {
         labelText: "Password",
         hintText: "Enter your password",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.lock),
+        suffixIcon: IconButton(
+          icon: Icon(
+            obscurePassword
+                ? Icons.visibility_rounded
+                : Icons.visibility_off_rounded,
+          ),
+          onPressed: () {
+            setState(() {
+              obscurePassword = !obscurePassword;
+            });
+          },
+        ),
+        prefixIcon: Icon(Icons.lock),
       ),
     );
   }
@@ -222,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
         labelText: "Email",
         hintText: "Enter your email",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.mail),
+        prefixIcon: Icon(Icons.mail),
       ),
     );
   }

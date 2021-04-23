@@ -1,4 +1,4 @@
-import 'package:bidding_app/utils/RoutingUtils.dart';
+import 'package:bidding_app/utils/routing/RoutingUtils.dart';
 import 'package:bidding_app/utils/constants.dart';
 import 'package:bidding_app/utils/size_config.dart';
 import 'package:bidding_app/widgets/commonUI/defaultButton.dart';

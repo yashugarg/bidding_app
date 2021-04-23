@@ -1,5 +1,6 @@
 import 'package:bidding_app/utils/constants.dart';
 import 'package:bidding_app/utils/size_config.dart';
+import 'package:bidding_app/widgets/commonUI/coustom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'components/categories.dart';
 import 'components/discount_banner.dart';
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      // bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.home),
+      bottomNavigationBar: CustomBottomNavBar(index: 0),
     );
   }
 }

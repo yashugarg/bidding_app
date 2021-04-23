@@ -13,7 +13,7 @@
 /// * you can hover a route it anywhere in VSCode/Android Studio to see argement structure
 class Routes {
   //auth
-  static const String forgotPwd = 'forgetPassword';
+  static const String forgotPwd = 'forgotPassword';
   static const String login = 'login';
   static const String signUp = 'signUp';
 
@@ -21,16 +21,19 @@ class Routes {
   static const String homepage = 'homepage';
   static const String notifications = 'notifications';
 
-  static const String productDetail = 'prodDetail';
+  static const String favorites = 'favorites';
 
   //user
-  static const String userInfo = 'userInfo';
+  static const String account = 'account';
+  static const String viewProfile = 'viewProfile';
   static const String editProfile = 'editProfile';
 
   //miscellaneous
   static const String aboutUs = 'aboutUs';
   static const String contactUs = 'contactUs';
   static const String faqs = 'faqs';
+
+  static const List<String> bottomNavBarRoutes = [homepage, favorites, account];
 
   static const List<String> unprotectedRouts = [login, signUp, forgotPwd];
 }

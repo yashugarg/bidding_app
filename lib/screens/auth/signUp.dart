@@ -11,6 +11,9 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  bool obscurePassword = true;
+  bool obscureConfirmPassword = true;
+
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController emailTextController = new TextEditingController();
@@ -118,7 +121,7 @@ class _SignupPageState extends State<SignupPage> {
 
   TextFormField buildConfirmPassFormField() {
     return TextFormField(
-      obscureText: true,
+      obscureText: obscureConfirmPassword,
       controller: confirmPasswordTextController,
       validator: (value) {
         if (value!.isEmpty) {
@@ -132,14 +135,26 @@ class _SignupPageState extends State<SignupPage> {
         labelText: "Confirm Password",
         hintText: "Re-enter your password",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.lock),
+        suffixIcon: IconButton(
+          icon: Icon(
+            obscureConfirmPassword
+                ? Icons.visibility_rounded
+                : Icons.visibility_off_rounded,
+          ),
+          onPressed: () {
+            setState(() {
+              obscureConfirmPassword = !obscureConfirmPassword;
+            });
+          },
+        ),
+        prefixIcon: Icon(Icons.lock),
       ),
     );
   }
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
-      obscureText: true,
+      obscureText: obscurePassword,
       controller: passwordTextController,
       validator: (value) {
         if (value!.isEmpty) {
@@ -153,7 +168,19 @@ class _SignupPageState extends State<SignupPage> {
         labelText: "Password",
         hintText: "Enter your password",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.lock),
+        suffixIcon: IconButton(
+          icon: Icon(
+            obscurePassword
+                ? Icons.visibility_rounded
+                : Icons.visibility_off_rounded,
+          ),
+          onPressed: () {
+            setState(() {
+              obscurePassword = !obscurePassword;
+            });
+          },
+        ),
+        prefixIcon: Icon(Icons.lock),
       ),
     );
   }
@@ -174,7 +201,7 @@ class _SignupPageState extends State<SignupPage> {
         labelText: "Email",
         hintText: "Enter your email",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.mail),
+        prefixIcon: Icon(Icons.mail),
       ),
     );
   }

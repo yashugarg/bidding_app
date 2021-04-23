@@ -30,7 +30,7 @@ class UserDBServices {
     userData['photoUrl'] =
         "https://avatars.dicebear.com/api/jdenticon/${user.uid}.svg";
     userData['email'] = user.email;
-    userData['displayName'] = user.displayName;
+    userData['displayName'] = user.displayName ?? "";
     userData['profileCreatedTime'] = DateTime.now();
     userData['phoneNo'] = user.phoneNumber;
     userData['address'] = null;

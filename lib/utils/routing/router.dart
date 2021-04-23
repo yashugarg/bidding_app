@@ -1,8 +1,10 @@
+import 'package:bidding_app/screens/auth/forgotPassword.dart';
 import 'package:bidding_app/screens/auth/login.dart';
 import 'package:bidding_app/screens/auth/signUp.dart';
 import 'package:bidding_app/screens/home/homepage.dart';
+import 'package:bidding_app/screens/profile/account.dart';
 import 'package:bidding_app/services/auth.dart';
-import 'package:bidding_app/utils/RoutingUtils.dart';
+import 'package:bidding_app/utils/routing/RoutingUtils.dart';
 import 'package:bidding_app/widgets/internetCheck.dart';
 import 'package:flutter/material.dart';
 
@@ -28,12 +30,13 @@ class Router {
     child: Text('Something went wrong'),
   ));
 
-  static MaterialPageRoute routify(Widget screen,{RouteSettings? settings}) => MaterialPageRoute(
-    settings:settings ,
-      builder: (_) => Scaffold(
-            body: screen,
-            bottomNavigationBar: CheckInternet(),
-          ));
+  static MaterialPageRoute routify(Widget screen, {RouteSettings? settings}) =>
+      MaterialPageRoute(
+          settings: settings,
+          builder: (_) => Scaffold(
+                body: screen,
+                bottomNavigationBar: CheckInternet(),
+              ));
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     try {
@@ -43,8 +46,8 @@ class Router {
       else {
         switch (settings.name) {
           //auth
-          // case Routes.forgotPwd:
-          //   return routify(Forgotpassword());
+          case Routes.forgotPwd:
+            return routify(ForgotPasswordPage());
           case Routes.login:
             return routify(LoginPage());
           case Routes.signUp:
@@ -55,8 +58,10 @@ class Router {
             return routify(HomePage());
 
           //user
-          // case Routes.userInfo:
-          //   return routify(Profile(),settings: settings);
+          case Routes.account:
+            return routify(Account());
+          // case Routes.viewProfile:
+          //   return routify(ViewUserProfile());
           // case Routes.editProfile:
           //   return routify(EditUserProfile());
 
@@ -72,7 +77,7 @@ class Router {
           //     ));
           //   }
           //   return routify(ContactUs());
-          // 
+          //
 
           // Paste new routes above this
           default:

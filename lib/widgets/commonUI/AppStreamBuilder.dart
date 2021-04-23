@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 // import 'package:bidding_app/constants/assetImages.dart';
-import 'package:bidding_app/utils/RoutingUtils.dart';
+import 'package:bidding_app/utils/routing/RoutingUtils.dart';
 
 typedef Widget SBui<T>(BuildContext context, T value);
 typedef Widget EBui(BuildContext context, Object? error);
