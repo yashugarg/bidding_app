@@ -19,16 +19,21 @@ class Routes {
 
   //home
   static const String homepage = 'homepage';
-  static const String notifications = 'notifications';
-
   static const String favorites = 'favorites';
-
-  //user
   static const String account = 'account';
+
+  //profile
   static const String viewProfile = 'viewProfile';
   static const String editProfile = 'editProfile';
 
-  //miscellaneous
+  //account
+  static const String myProducts = 'notifications';
+  static const String orderHistory = 'notifications';
+  static const String notifications = 'notifications';
+  static const String settings = 'settings';
+  static const String helpCenter = 'helpCenter';
+
+  //help center
   static const String aboutUs = 'aboutUs';
   static const String contactUs = 'contactUs';
   static const String faqs = 'faqs';

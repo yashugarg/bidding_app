@@ -2,6 +2,7 @@ import 'package:bidding_app/main.dart';
 import 'package:bidding_app/models/user.dart';
 import 'package:bidding_app/services/auth.dart';
 import 'package:bidding_app/utils/constants.dart';
+import 'package:bidding_app/utils/routing/RoutingUtils.dart';
 import 'package:bidding_app/widgets/commonUI/coustom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,7 +29,7 @@ class _AccountState extends State<Account> {
             ),
           ),
           actions: [
-            FlatButton(
+            TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -37,7 +38,7 @@ class _AccountState extends State<Account> {
                 style: TextStyle(color: Colors.grey[600]),
               ),
             ),
-            FlatButton(
+            TextButton(
               onPressed: () {
                 _signOut();
               },
@@ -72,12 +73,16 @@ class _AccountState extends State<Account> {
                 children: [
                   CircleAvatar(
                     backgroundColor: Colors.white,
-                    child: SvgPicture.network(
-                      Provider.of<AppUser>(context).photoUrl ??
-                          "https://avatars.dicebear.com/api/jdenticon/${Provider.of<AppUser>(context).id}.svg",
-                      width: 100,
-                      fit: BoxFit.fill,
-                    ),
+                    child: Provider.of<AppUser>(context).photoUrl != null
+                        ? SvgPicture.network(
+                            Provider.of<AppUser>(context).photoUrl!,
+                            width: 100,
+                            fit: BoxFit.fill,
+                          )
+                        : Icon(
+                            Icons.account_circle_outlined,
+                            size: 100,
+                          ),
                   ),
                   SizedBox(height: 20),
                   Text(
@@ -89,8 +94,18 @@ class _AccountState extends State<Account> {
             ),
             SizedBox(height: 10),
             AccountMenu(
-              text: "My Account",
+              text: "My Profile",
               icon: Icons.person_outline_rounded,
+              press: () {},
+            ),
+            AccountMenu(
+              text: "My Products",
+              icon: Icons.shopping_bag_outlined,
+              press: () => Navigator.pushNamed(context, Routes.myProducts),
+            ),
+            AccountMenu(
+              text: "Order History",
+              icon: Icons.history,
               press: () {},
             ),
             AccountMenu(
@@ -106,7 +121,7 @@ class _AccountState extends State<Account> {
             AccountMenu(
               text: "Help Center",
               icon: Icons.help_outline,
-              press: () {},
+              press: () => Navigator.pushNamed(context, Routes.helpCenter),
             ),
             AccountMenu(
               text: "Log Out",
@@ -137,23 +152,17 @@ class AccountMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: FlatButton(
-        padding: EdgeInsets.all(20),
+      child: ListTile(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        color: Color(0xFFF5F6F9),
-        onPressed: press,
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              color: kPrimaryColor,
-              size: 22,
-            ),
-            SizedBox(width: 20),
-            Expanded(child: Text(text)),
-            Icon(Icons.arrow_forward_ios),
-          ],
+        tileColor: Color(0xFFF5F6F9),
+        onTap: press,
+        leading: Icon(
+          icon,
+          color: kPrimaryColor,
+          size: 22,
         ),
+        trailing: Icon(Icons.arrow_forward_ios),
+        title: Text(text),
       ),
     );
   }

@@ -1,8 +1,14 @@
+import 'package:bidding_app/screens/account/helpCenter.dart';
+import 'package:bidding_app/screens/account/helpCenter/aboutUs.dart';
+import 'package:bidding_app/screens/account/helpCenter/contactUs.dart';
+import 'package:bidding_app/screens/account/helpCenter/faqs.dart';
+import 'package:bidding_app/screens/account/myProducts.dart';
 import 'package:bidding_app/screens/auth/forgotPassword.dart';
 import 'package:bidding_app/screens/auth/login.dart';
 import 'package:bidding_app/screens/auth/signUp.dart';
+import 'package:bidding_app/screens/favorites.dart';
 import 'package:bidding_app/screens/home/homepage.dart';
-import 'package:bidding_app/screens/profile/account.dart';
+import 'package:bidding_app/screens/account/account.dart';
 import 'package:bidding_app/services/auth.dart';
 import 'package:bidding_app/utils/routing/RoutingUtils.dart';
 import 'package:bidding_app/widgets/internetCheck.dart';
@@ -56,28 +62,35 @@ class Router {
           //home
           case Routes.homepage:
             return routify(HomePage());
-
-          //user
+          case Routes.favorites:
+            return routify(FavoriteProducts());
           case Routes.account:
             return routify(Account());
+
+          //account
+          case Routes.myProducts:
+            return routify(MyProducts());
+          case Routes.helpCenter:
+            return routify(HelpCenter());
+
+          //profile
           // case Routes.viewProfile:
           //   return routify(ViewUserProfile());
           // case Routes.editProfile:
           //   return routify(EditUserProfile());
 
-          //miscellaneous
-          // case Routes.aboutUs:
-          //   return routify(AboutUs());
-          // case Routes.faqs:
-          //   return routify(FAQs());
-          // case Routes.contactUs:
-          //   if (settings.arguments is String) {
-          //     return routify(ContactUs(
-          //       initial: settings.arguments as String?,
-          //     ));
-          //   }
-          //   return routify(ContactUs());
-          //
+          //help center
+          case Routes.aboutUs:
+            return routify(AboutUs());
+          case Routes.faqs:
+            return routify(FAQs());
+          case Routes.contactUs:
+            // if (settings.arguments is String) {
+            //   return routify(ContactUs(
+            //     initial: settings.arguments as String?,
+            //   ));
+            // }
+            return routify(ContactUs());
 
           // Paste new routes above this
           default:

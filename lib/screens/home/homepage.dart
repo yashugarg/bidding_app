@@ -46,7 +46,6 @@ class _HomePageState extends State<HomePage> {
                             prefixIcon: Icon(Icons.search)),
                       ),
                     ),
-                    IconButton(icon: Icon(Icons.shopping_cart_rounded), onPressed: null),
                     IconButton(icon: Icon(Icons.notifications), onPressed: null),
                   ],
                 ),

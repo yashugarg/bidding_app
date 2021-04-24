@@ -1,5 +1,6 @@
 import 'package:bidding_app/services/auth.dart';
 import 'package:bidding_app/utils/constants.dart';
+import 'package:bidding_app/utils/routing/RoutingUtils.dart';
 import 'package:bidding_app/utils/size_config.dart';
 import 'package:bidding_app/widgets/commonUI/defaultButton.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordPage> {
           title: new Text("Forgot your password"),
           content: new Text("An email has been sent to reset your password"),
           actions: <Widget>[
-            new FlatButton(
+            new TextButton(
               child: new Text("Dismiss"),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -109,6 +110,27 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordPage> {
                       DefaultButton(
                         text: "Continue",
                         press: reset,
+                      ),
+                      SizedBox(height: SizeConfig.screenHeight * 0.08),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don’t have an account? ",
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(16)),
+                          ),
+                          GestureDetector(
+                            onTap: () =>
+                                Navigator.pushReplacementNamed(context, Routes.signUp),
+                            child: Text(
+                              "Sign Up",
+                              style: TextStyle(
+                                  fontSize: getProportionateScreenWidth(16),
+                                  color: kPrimaryColor),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

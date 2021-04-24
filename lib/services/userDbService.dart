@@ -47,6 +47,13 @@ class UserDBServices {
     await usersRef.doc(uid).update(data);
   }
 
+  Future<String?> getNotificationToken(String uid) async {
+    return usersRef
+        .doc(uid)
+        .get()
+        .then<String>((value) => value.data()!['notificationToken'].toString());
+  }
+
   Future<void> updateNotificationToken(
       String uid, String notificationToken) async {
     await usersRef.doc(uid).update({'notificationToken': notificationToken});

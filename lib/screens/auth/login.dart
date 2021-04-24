@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                 title: new Text("Could not Sign In"),
                 content: new Text('${e is VerificationError ? e.message : e}'),
                 actions: <Widget>[
-                  new FlatButton(
+                  new TextButton(
                       child: new Text("Dismiss"),
                       onPressed: () {
                         Navigator.of(context).pop();

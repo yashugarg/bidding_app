@@ -42,9 +42,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: "Shop"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border_rounded), label: "Favorites"),
+            icon: Icon(Icons.favorite_rounded), label: "Favorites"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline_rounded), label: "Account"),
+            icon: Icon(Icons.person_rounded), label: "Account"),
       ],
     );
   }

@@ -29,9 +29,9 @@ class _SignupPageState extends State<SignupPage> {
         return AlertDialog(
           title: new Text("Verify your account"),
           content: new Text(
-              "Please verify your email before we start your journey with Raahee! The link has been sent to your email."),
+              "Please verify your email before we start your journey with Bidder! The link has been sent to your email."),
           actions: <Widget>[
-            new FlatButton(
+            new TextButton(
               child: new Text("Dismiss"),
               onPressed: () {
                 Navigator.of(context).pop();

@@ -57,14 +57,7 @@ class FirebaseMessage {
         <String, dynamic>{
           "notification": <String, dynamic>{"body": body, "title": title},
           "priority": "high",
-          "data": data
-          // ?? <String, dynamic>{
-          //   "click_action": "FLUTTER_NOTIFICATION_CLICK",
-          //   "id": "1",
-          //   "status": "done",
-          //   "sound": "default"
-          // }
-          ,
+          "data": data,
           "to": token
         },
       ),

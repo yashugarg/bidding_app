@@ -104,38 +104,37 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     initMessaging();
-    handleShareIntent();
+    // handleShareIntent();
     // Listen to lifecycle events.
     WidgetsBinding.instance!.addObserver(this);
     //secure screenshot
     //    FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    WidgetsBinding.instance!.removeObserver(this);
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   WidgetsBinding.instance!.removeObserver(this);
+  // }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      handleShareIntent();
-    }
-  }
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   if (state == AppLifecycleState.resumed) {
+  //     handleShareIntent();
+  //   }
+  // }
 
-  Future handleShareIntent() async {
-    var sharedData;
-    final sharedText = await platform.invokeMethod("getSharedText");
-    final sharedImage = await platform.invokeMethod("getSharedImage");
-    sharedData = {
-      'text': sharedText,
-      'file': sharedImage,
-    };
-    if (sharedData['text'] != null || sharedData['file'] != null) {
-      // TODO
-    }
-  }
+  // Future handleShareIntent() async {
+  //   var sharedData;
+  //   final sharedText = await platform.invokeMethod("getSharedText");
+  //   final sharedImage = await platform.invokeMethod("getSharedImage");
+  //   sharedData = {
+  //     'text': sharedText,
+  //     'file': sharedImage,
+  //   };
+  //   if (sharedData['text'] != null || sharedData['file'] != null) {
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
