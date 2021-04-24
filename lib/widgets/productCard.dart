@@ -37,7 +37,7 @@ class _ProductCardState extends State<ProductCard> {
   likeUnlike() async {
     if (isLiked2()) {
       await ProductDBServices(uid: context.read<AppUser>().id)
-          .removeFromFavorites(productId: product!.id);
+          .removeFromFavorites(productId: product!.id!);
       setState(
         () {
           product!.likes.remove(context.read<AppUser>().id);
@@ -102,7 +102,7 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                   InkWell(
                     borderRadius: BorderRadius.circular(50),
-                    onTap: () {},
+                    onTap: likeUnlike,
                     child: Container(
                       padding: EdgeInsets.all(getProportionateScreenWidth(8)),
                       height: getProportionateScreenWidth(28),

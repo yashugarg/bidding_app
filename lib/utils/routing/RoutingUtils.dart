@@ -27,8 +27,8 @@ class Routes {
   static const String editProfile = 'editProfile';
 
   //account
-  static const String myProducts = 'notifications';
-  static const String orderHistory = 'notifications';
+  static const String myProducts = 'myProducts';
+  static const String orderHistory = 'orderHistory';
   static const String notifications = 'notifications';
   static const String settings = 'settings';
   static const String helpCenter = 'helpCenter';

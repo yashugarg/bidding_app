@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Product {
-  final String id;
+  final String? id;
   final String userID;
   final String title;
   final String description;
@@ -19,7 +19,7 @@ class Product {
   final DateTime updatedAt;
 
   Product({
-    required this.id,
+    this.id,
     required this.userID,
     required this.title,
     required this.description,
@@ -62,4 +62,23 @@ class Product {
           (doc.data()!['updatedAt'] as Timestamp).toDate().toString()),
     );
   }
+
+  Map<String, dynamic> toMap() => {
+        'id': id,
+        'userID': userID,
+        'title': title,
+        'description': description,
+        'condition': condition,
+        'category': category,
+        'subcategory': subcategory,
+        'quickSellPrice': quickSellPrice,
+        'minimumBid': minimumBid,
+        'biddingTime': biddingTime,
+        'isPopular': isPopular,
+        'images': images,
+        'likes': likes,
+        'isVerified': isVerified,
+        'publishedAt': publishedAt,
+        'updatedAt': updatedAt,
+      };
 }

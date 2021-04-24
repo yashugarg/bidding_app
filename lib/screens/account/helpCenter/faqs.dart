@@ -7,34 +7,30 @@ class FAQs extends StatefulWidget {
 
 class _FAQsState extends State<FAQs> {
   @override
- Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-          leading: new IconButton(icon: Icon(Icons.arrow_back, color: Colors.white), onPressed: () => Navigator.of(context).pop()),
-          backgroundColor: Color(0xFF4A3298),
-          title:
-              Text('FAQs', style: TextStyle(fontSize: 19, color: Colors.white)),
+        appBar: AppBar(
+          title: Text('FAQs'),
           actions: <Widget>[
-            
-            new IconButton(
+            IconButton(
                 icon: Icon(
                   Icons.search,
                   color: Colors.white,
                 ),
                 onPressed: null)
-          ]),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0.0),
-        child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          physics: BouncingScrollPhysics(),
-        itemBuilder: (BuildContext context, int index) =>
-            EntryItem(data[index]),
-        itemCount: data.length,
-      ),
-    )
-    );
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 0.0),
+          child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
+            itemBuilder: (BuildContext context, int index) =>
+                EntryItem(data[index]),
+            itemCount: data.length,
+          ),
+        ));
   }
 }
 
