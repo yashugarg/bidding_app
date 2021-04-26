@@ -37,11 +37,11 @@ class _AddNewProductState extends State<AddNewProduct> {
   List<String> conditionList = ["New", "Like New", "Good", "Fair", "Poor"];
 
   Map<String, List<String>> categoryList = {
-    'Fashion': ["Shirts"],
-    'Electronics': ["Mobiles"],
-    'Collectibles': ["Stamps"],
-    'Handbags': ["asd"],
-    'Watches': ["asdasd"],
+    'Fashion': ["Clothing", "Accessories", "Shoes"],
+    'Electronics': ["Mobiles","Mobile Accessories", "Headphones", "Speakers", "Cameras", "Gaming Consoles", "Household Appliances"],
+    'Collectibles': ["Stamps", "Antiques", "Comics", "Coins", "Toys"],
+    'Handbags': ["Leather Bag", "Satchel Bag", "Shoulder Bag", "Saddle Bag"],
+    'Watches': ["Analog", "Digital"],
     'Others': []
   };
 
