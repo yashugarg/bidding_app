@@ -23,11 +23,13 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   }
 
   void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-    Navigator.pushReplacementNamed(
-        context, Routes.bottomNavBarRoutes[_currentIndex]);
+    if (_currentIndex != index) {
+      setState(() {
+        _currentIndex = index;
+      });
+      Navigator.pushReplacementNamed(
+          context, Routes.bottomNavBarRoutes[_currentIndex]);
+    }
   }
 
   @override

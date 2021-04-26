@@ -33,6 +33,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   cached_network_image: ^3.0.0
+  carousel_slider: ^3.0.0
   file_picker: ^3.0.1
   cloud_firestore: ^1.0.5
   firebase_analytics: ^8.0.0

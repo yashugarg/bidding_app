@@ -17,7 +17,7 @@ class FirebaseMessage {
   self() async {
     final token = await getToken();
     final res = await http.post(
-      Uri.dataFromString('https://fcm.googleapis.com/fcm/send'),
+      Uri.parse('https://fcm.googleapis.com/fcm/send'),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'Authorization': 'key=$_serverToken',
@@ -48,7 +48,7 @@ class FirebaseMessage {
     data["sound"] = "default";
     print(data);
     final res = await http.post(
-      Uri.dataFromString("https://fcm.googleapis.com/fcm/send"),
+      Uri.parse("https://fcm.googleapis.com/fcm/send"),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'Authorization': 'key=$_serverToken',
