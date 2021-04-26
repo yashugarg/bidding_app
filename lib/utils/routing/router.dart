@@ -1,3 +1,4 @@
+import 'package:bidding_app/screens/account/addNewProduct.dart';
 import 'package:bidding_app/screens/account/editUserProfile.dart';
 import 'package:bidding_app/screens/account/helpCenter.dart';
 import 'package:bidding_app/screens/account/helpCenter/aboutUs.dart';
@@ -73,6 +74,8 @@ class Router {
           //account
           case Routes.myProducts:
             return routify(MyProducts());
+          case Routes.newProduct:
+            return routify(AddNewProduct());
           case Routes.orderHistory:
             return routify(MyOrders());
           case Routes.helpCenter:

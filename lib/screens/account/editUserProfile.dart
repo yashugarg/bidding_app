@@ -1,13 +1,11 @@
 import 'package:bidding_app/models/user.dart';
 import 'package:bidding_app/services/userDbService.dart';
+import 'package:bidding_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../utils/constants.dart';
-import '../../utils/constants.dart';
 
 const _ktextFieldStyle = TextStyle(fontSize: 14);
 

@@ -2,6 +2,7 @@ import 'package:bidding_app/models/product.dart';
 import 'package:bidding_app/models/user.dart';
 import 'package:bidding_app/services/productDbService.dart';
 import 'package:bidding_app/utils/constants.dart';
+import 'package:bidding_app/utils/routing/RoutingUtils.dart';
 import 'package:bidding_app/widgets/commonUI/AppStreamBuilder.dart';
 import 'package:bidding_app/widgets/productCard.dart';
 import 'package:flutter/material.dart';
@@ -46,11 +47,11 @@ class MyProducts extends StatelessWidget {
         child: IconButton(
           padding: EdgeInsets.all(10),
           iconSize: 30,
-          color: kPrimaryColor,
+          color: Colors.white,
           icon: Icon(
             Icons.add,
           ),
-          onPressed: null,
+          onPressed: () => Navigator.pushNamed(context, Routes.newProduct),
         ),
       ),
     );

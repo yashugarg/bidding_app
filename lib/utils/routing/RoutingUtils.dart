@@ -28,6 +28,7 @@ class Routes {
 
   //account
   static const String myProducts = 'myProducts';
+  static const String newProduct = 'newProduct';
   static const String orderHistory = 'orderHistory';
   static const String notifications = 'notifications';
   static const String settings = 'settings';

@@ -1,12 +1,9 @@
 import 'dart:io';
-
 import 'package:bidding_app/models/product.dart';
 import 'package:bidding_app/services/firebase_messaging.dart';
 import 'package:bidding_app/services/firestoreStorage.dart';
 import 'package:bidding_app/services/userDbService.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../models/product.dart';
 
 class ProductDBServices {
   String? uid;
@@ -20,19 +17,22 @@ class ProductDBServices {
   Future addNewProduct({
     required String title,
     required String description,
-    required String category,
+    required String? category,
     String? subcategory,
     required String condition,
     double? quickSellPrice,
+    required bool isUpForBidding,
     double? minimumBid,
     DateTime? biddingTime,
     required List<File> images,
+    required isActive,
   }) async {
     List<String> urls = [];
-    images.map((image) async {
-      urls.add(await FireStorageUtils()
-          .upload(file: image, path: 'products', name: '$uid${DateTime.now()}'));
-    });
+    for (File image in images) {
+      String url = await FireStorageUtils()
+          .upload(file: image, path: 'products', name: '$uid${DateTime.now()}');
+      urls.add(url);
+    }
     Product product = Product(
       userID: uid!,
       title: title,
@@ -41,11 +41,13 @@ class ProductDBServices {
       category: category,
       subcategory: subcategory,
       quickSellPrice: quickSellPrice,
+      isUpForBidding: isUpForBidding,
       minimumBid: minimumBid,
       biddingTime: biddingTime,
       isPopular: false,
       images: urls,
       likes: [],
+      isActive: isActive,
       isVerified: false,
       publishedAt: DateTime.now(),
       updatedAt: DateTime.now(),
@@ -73,7 +75,7 @@ class ProductDBServices {
             'feature': 'product',
             'subfeature': 'like',
             'productId': product.id,
-            'imageUrl': "",
+            // 'imageUrl': "",
           });
   }
 
