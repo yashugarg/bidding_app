@@ -63,11 +63,11 @@ class _LoginPageState extends State<LoginPage> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-                title: new Text("Could not Sign In"),
-                content: new Text('${e is VerificationError ? e.message : e}'),
+                title: Text("Could not Sign In"),
+                content: Text('${e is VerificationError ? e.message : e}'),
                 actions: <Widget>[
-                  new TextButton(
-                      child: new Text("Dismiss"),
+                  TextButton(
+                      child: Text("Dismiss"),
                       onPressed: () {
                         Navigator.of(context).pop();
                       })

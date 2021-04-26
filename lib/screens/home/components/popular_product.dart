@@ -1,7 +1,10 @@
+import 'package:bidding_app/models/product.dart';
+import 'package:bidding_app/services/productDbService.dart';
+import 'package:bidding_app/utils/routing/RoutingUtils.dart';
 import 'package:bidding_app/utils/size_config.dart';
+import 'package:bidding_app/widgets/commonUI/AppStreamBuilder.dart';
+import 'package:bidding_app/widgets/productCard.dart';
 import 'package:flutter/material.dart';
-// import 'package:bidding_app/widgets/product_card.dart';
-// import 'package:bidding_app/models/product.dart';
 
 class PopularProducts extends StatelessWidget {
   @override
@@ -22,7 +25,8 @@ class PopularProducts extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: null,
+                onTap: () =>
+                    Navigator.pushNamed(context, Routes.popularProducts),
                 child: Text(
                   "See More",
                   style: TextStyle(color: Color(0xFFBBBBBB)),
@@ -32,24 +36,21 @@ class PopularProducts extends StatelessWidget {
           ),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              // ...List.generate(
-              //   demoProducts.length,
-              //   (index) {
-              //     if (demoProducts[index].isPopular)
-              //       return ProductCard(product: demoProducts[index]);
-
-              //     return SizedBox
-              //         .shrink(); // here by default width and height is 0
-              //   },
-              // ),
-              SizedBox(width: getProportionateScreenWidth(20)),
-            ],
-          ),
-        )
+        StrmBldr<List<Product>>(
+          stream: ProductDBServices().fetchAllProducts(),
+          noDataWidget: Center(child: Text("No Popular Products")),
+          builder: (context, value) {
+            return SizedBox(
+              height: 170,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: value!.length > 4 ? 4 : value.length,
+                itemBuilder: (context, index) =>
+                    ProductCard(product: value[index]),
+              ),
+            );
+          },
+        ),
       ],
     );
   }

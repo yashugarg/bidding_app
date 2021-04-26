@@ -26,9 +26,13 @@ class Routes {
   static const String viewProfile = 'viewProfile';
   static const String editProfile = 'editProfile';
 
+  //product
+  static const String newProduct = 'newProduct';
+  static const String productDetails = 'productDetails';
+  static const String popularProducts = 'popularProduct';
+
   //account
   static const String myProducts = 'myProducts';
-  static const String newProduct = 'newProduct';
   static const String orderHistory = 'orderHistory';
   static const String notifications = 'notifications';
   static const String settings = 'settings';

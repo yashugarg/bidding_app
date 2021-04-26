@@ -9,7 +9,7 @@ class ProductDBServices {
   String? uid;
   late CollectionReference productsRef;
 
-  ProductDBServices({required String? uid}) {
+  ProductDBServices({String? uid}) {
     this.uid = uid;
     productsRef = FirebaseFirestore.instance.collection('products');
   }
@@ -20,7 +20,7 @@ class ProductDBServices {
     required String? category,
     String? subcategory,
     required String condition,
-    double? quickSellPrice,
+    required double quickSellPrice,
     required bool isUpForBidding,
     double? minimumBid,
     DateTime? biddingTime,
@@ -89,9 +89,26 @@ class ProductDBServices {
     );
   }
 
+  Stream<List<Product>> fetchAllProducts() {
+    return productsRef
+        .orderBy('updatedAt', descending: true)
+        .snapshots()
+        .asyncMap<List<Product>>((event) =>
+            event.docs.map<Product>((d) => Product.fromDocument(d)).toList());
+  }
+
   Stream<List<Product>> fetchMyProducts() {
     return productsRef
         .where('userID', isEqualTo: uid)
+        .orderBy('updatedAt', descending: true)
+        .snapshots()
+        .asyncMap<List<Product>>((event) =>
+            event.docs.map<Product>((d) => Product.fromDocument(d)).toList());
+  }
+
+  Stream<List<Product>> fetchPopularProducts() {
+    return productsRef
+        .where('isPopular', isEqualTo: true)
         .orderBy('updatedAt', descending: true)
         .snapshots()
         .asyncMap<List<Product>>((event) =>

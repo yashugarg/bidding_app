@@ -21,11 +21,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text("Forgot your password"),
-          content: new Text("An email has been sent to reset your password"),
+          title: Text("Forgot your password"),
+          content: Text("An email has been sent to reset your password"),
           actions: <Widget>[
-            new TextButton(
-              child: new Text("Dismiss"),
+            TextButton(
+              child: Text("Dismiss"),
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();

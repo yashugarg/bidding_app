@@ -8,7 +8,7 @@ class Product {
   final String? category;
   final String? subcategory;
   final String condition;
-  final double? quickSellPrice;
+  final double quickSellPrice;
   final bool isUpForBidding;
   final double? minimumBid;
   final DateTime? biddingTime;

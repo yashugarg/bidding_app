@@ -2,6 +2,7 @@ import 'package:bidding_app/models/product.dart';
 import 'package:bidding_app/models/user.dart';
 import 'package:bidding_app/services/productDbService.dart';
 import 'package:bidding_app/utils/constants.dart';
+import 'package:bidding_app/utils/routing/RoutingUtils.dart';
 import 'package:bidding_app/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -54,12 +55,13 @@ class _ProductCardState extends State<ProductCard> {
   Widget build(BuildContext context) {
     return Container(
       width: getProportionateScreenWidth(widget.width),
+      height: getProportionateScreenHeight(widget.width),
       child: GestureDetector(
-        // onTap: () => Navigator.pushNamed(
-        //   context,
-        //   DetailsScreen.routeName,
-        //   arguments: ProductDetailsArguments(product: product),
-        // ),
+        onTap: () => Navigator.pushNamed(
+          context,
+          Routes.productDetails,
+          arguments: product!.id!,
+        ),
         child: Card(
           elevation: 5.0,
           clipBehavior: Clip.antiAlias,
@@ -94,12 +96,12 @@ class _ProductCardState extends State<ProductCard> {
                 flex: 4,
                 child: Padding(
                   padding:
-                      EdgeInsets.only(left: getProportionateScreenWidth(20)),
+                      EdgeInsets.only(left: getProportionateScreenWidth(10)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "₹${product!.quickSellPrice}",
+                        "₹${product!.quickSellPrice.toInt()}",
                         style: TextStyle(
                           fontSize: getProportionateScreenWidth(18),
                           fontWeight: FontWeight.w600,

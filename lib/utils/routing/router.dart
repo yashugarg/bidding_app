@@ -11,7 +11,9 @@ import 'package:bidding_app/screens/auth/forgotPassword.dart';
 import 'package:bidding_app/screens/auth/login.dart';
 import 'package:bidding_app/screens/auth/signUp.dart';
 import 'package:bidding_app/screens/favorites.dart';
+import 'package:bidding_app/screens/product/allPopularProducts.dart';
 import 'package:bidding_app/screens/home/homepage.dart';
+import 'package:bidding_app/screens/product/productDetails.dart';
 import 'package:bidding_app/screens/account.dart';
 import 'package:bidding_app/services/auth.dart';
 import 'package:bidding_app/utils/routing/RoutingUtils.dart';
@@ -74,8 +76,6 @@ class Router {
           //account
           case Routes.myProducts:
             return routify(MyProducts());
-          case Routes.newProduct:
-            return routify(AddNewProduct());
           case Routes.orderHistory:
             return routify(MyOrders());
           case Routes.helpCenter:
@@ -99,6 +99,20 @@ class Router {
             //   ));
             // }
             return routify(ContactUs());
+
+          // product
+          case Routes.newProduct:
+            return routify(AddNewProduct());
+          case Routes.productDetails:
+            if (settings.arguments is String) {
+              return routify(ProductDetails(
+                pId: settings.arguments as String,
+              ));
+            } else {
+              return routify(wrong);
+            }
+          case Routes.popularProducts:
+            return routify(AllPopularProducts());
 
           // Paste new routes above this
           default:

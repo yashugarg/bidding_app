@@ -27,12 +27,12 @@ class _SignupPageState extends State<SignupPage> {
       builder: (BuildContext context) {
         //! ********************************** return object of type Dialog  **************************
         return AlertDialog(
-          title: new Text("Verify your account"),
-          content: new Text(
+          title: Text("Verify your account"),
+          content: Text(
               "Please verify your email before we start your journey with Bidder! The link has been sent to your email."),
           actions: <Widget>[
-            new TextButton(
-              child: new Text("Dismiss"),
+            TextButton(
+              child: Text("Dismiss"),
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.pushReplacement(context,
