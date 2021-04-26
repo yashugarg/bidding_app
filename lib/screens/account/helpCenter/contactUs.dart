@@ -17,7 +17,6 @@ class _ContactUsState extends State<ContactUs> {
         backgroundColor: Color(0xFF4A3298),
         title: Text('Contact Us',
             style: TextStyle(fontSize: 19, color: Colors.white)),
-        
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
@@ -26,7 +25,7 @@ class _ContactUsState extends State<ContactUs> {
             children: <Widget>[
               Center(
                 child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/icon.png'),
+                  backgroundImage: AssetImage('assets/images/icon.png'),
                   radius: 40.0,
                 ),
               ),
