@@ -1,34 +1,38 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Product {
-  final String id;
+  final String? id;
   final String userID;
   final String title;
   final String description;
-  final String category;
+  final String? category;
   final String? subcategory;
   final String condition;
   final double? quickSellPrice;
+  final bool isUpForBidding;
   final double? minimumBid;
   final DateTime? biddingTime;
   final List<String> images;
   final List<String> likes;
+  final bool isActive;
   final bool isPopular;
   final bool isVerified;
   final DateTime publishedAt;
   final DateTime updatedAt;
 
   Product({
-    required this.id,
+    this.id,
     required this.userID,
     required this.title,
     required this.description,
     required this.category,
     this.subcategory,
     required this.condition,
-    this.quickSellPrice,
+    required this.quickSellPrice,
+    required this.isUpForBidding,
     this.minimumBid,
     this.biddingTime,
+    required this.isActive,
     this.isPopular = false,
     required this.isVerified,
     required this.images,
@@ -47,14 +51,16 @@ class Product {
       category: doc.data()!['category'],
       subcategory: doc.data()!['subcategory'],
       quickSellPrice: doc.data()!['quickSellPrice'],
+      isUpForBidding: doc.data()!['isUpForBidding'],
       minimumBid: doc.data()!['minimumBid'],
       biddingTime: doc.data()!['biddingTime'] != null
           ? DateTime.parse(
               (doc.data()!['biddingTime'] as Timestamp).toDate().toString())
           : null,
       isPopular: doc.data()!['isPopular'] ?? false,
-      images: doc.data()!['images'],
-      likes: doc.data()!['likes'],
+      images: List<String>.from(doc.data()!['images']),
+      likes: List<String>.from(doc.data()!['likes']),
+      isActive: doc.data()!['isActive'],
       isVerified: doc.data()!['isVerified'],
       publishedAt: DateTime.parse(
           (doc.data()!['publishedAt'] as Timestamp).toDate().toString()),
@@ -62,4 +68,24 @@ class Product {
           (doc.data()!['updatedAt'] as Timestamp).toDate().toString()),
     );
   }
+
+  Map<String, dynamic> toMap() => {
+        'userID': userID,
+        'title': title,
+        'description': description,
+        'condition': condition,
+        'category': category,
+        'subcategory': subcategory,
+        'quickSellPrice': quickSellPrice,
+        'isUpForBidding': isUpForBidding,
+        'minimumBid': minimumBid,
+        'biddingTime': biddingTime,
+        'isPopular': isPopular,
+        'images': images,
+        'likes': likes,
+        'isActive': isActive,
+        'isVerified': isVerified,
+        'publishedAt': publishedAt,
+        'updatedAt': updatedAt,
+      };
 }

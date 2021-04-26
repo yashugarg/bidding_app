@@ -58,7 +58,7 @@ class _SignupPageState extends State<SignupPage> {
           password: passwordTextController.text);
       _showVerifyEmailSentDialog();
     } catch (e) {
-      _scaffoldKey.currentState!.showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('$e')),
       );
     }

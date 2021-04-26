@@ -47,7 +47,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordPage> {
       await authService.passwordReset(emailTextController.text);
       _showPasswordEmailSentDialog();
     } catch (e) {
-      _scaffoldKey.currentState!.showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$e'),
         ),
@@ -121,8 +121,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordPage> {
                                 fontSize: getProportionateScreenWidth(16)),
                           ),
                           GestureDetector(
-                            onTap: () =>
-                                Navigator.pushReplacementNamed(context, Routes.signUp),
+                            onTap: () => Navigator.pushReplacementNamed(
+                                context, Routes.signUp),
                             child: Text(
                               "Sign Up",
                               style: TextStyle(

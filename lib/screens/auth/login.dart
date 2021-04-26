@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
       var user = await authService.googleSign();
       _navigate(user);
     } catch (e) {
-      _scaffoldKey.currentState!.showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('$e'),
       ));
     }
@@ -138,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                               try {
                                 await loginuser();
                               } catch (e) {
-                                _scaffoldKey.currentState!
+                                ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
                                   content: Text('$e'),
                                 ));

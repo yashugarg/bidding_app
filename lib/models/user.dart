@@ -30,8 +30,12 @@ class AppUser {
       email: doc.data()!['email'].toString(),
       photoUrl: doc.data()!['photoUrl'].toString(),
       displayName: doc.data()!['displayName'].toString(),
-      phoneNo: doc.data()!['phoneNo'].toString(),
-      address: doc.data()!['address'].toString(),
+      phoneNo: doc.data()!['phoneNo'] != null
+          ? doc.data()!['phoneNo'].toString()
+          : "",
+      address: doc.data()!['address'] != null
+          ? doc.data()!['address'].toString()
+          : "",
       notificationToken: doc.data()!['notificationToken'].toString(),
       gender: doc.data()!['gender'].toString(),
       dob: doc.data()!['dob'] != null

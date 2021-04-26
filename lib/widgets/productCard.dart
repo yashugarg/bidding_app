@@ -12,7 +12,7 @@ class ProductCard extends StatefulWidget {
   const ProductCard({
     Key? key,
     this.width = 140,
-    this.aspectRetio = 1.02,
+    this.aspectRetio = 1,
     required this.product,
   }) : super(key: key);
   @override
@@ -37,91 +37,90 @@ class _ProductCardState extends State<ProductCard> {
   likeUnlike() async {
     if (isLiked2()) {
       await ProductDBServices(uid: context.read<AppUser>().id)
-          .removeFromFavorites(productId: product!.id);
-      setState(
-        () {
-          product!.likes.remove(context.read<AppUser>().id);
-        },
-      );
+          .removeFromFavorites(productId: product!.id!);
+      setState(() {
+        product!.likes.remove(context.read<AppUser>().id);
+      });
     } else {
       await ProductDBServices(uid: context.read<AppUser>().id)
           .addToFavorites(product: widget.product);
-      setState(
-        () {
-          product!.likes.add(context.read<AppUser>().id!);
-        },
-      );
+      setState(() {
+        product!.likes.add(context.read<AppUser>().id!);
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: getProportionateScreenWidth(20)),
-      child: SizedBox(
-        width: getProportionateScreenWidth(widget.width),
-        child: GestureDetector(
-          // onTap: () => Navigator.pushNamed(
-          //   context,
-          //   DetailsScreen.routeName,
-          //   arguments: ProductDetailsArguments(product: product),
-          // ),
+    return Container(
+      width: getProportionateScreenWidth(widget.width),
+      child: GestureDetector(
+        // onTap: () => Navigator.pushNamed(
+        //   context,
+        //   DetailsScreen.routeName,
+        //   arguments: ProductDetailsArguments(product: product),
+        // ),
+        child: Card(
+          elevation: 5.0,
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              AspectRatio(
-                aspectRatio: 1.02,
+              Flexible(
+                flex: 10,
                 child: Container(
-                  padding: EdgeInsets.all(getProportionateScreenWidth(20)),
                   decoration: BoxDecoration(
                     color: kSecondaryColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Hero(
                     tag: product!.id.toString(),
-                    child: Image.asset(product!.images[0]),
+                    child: Image.network(product!.images[0]),
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
-              Text(
-                product!.title,
-                style: TextStyle(color: Colors.black),
-                maxLines: 2,
+              Flexible(
+                flex: 3,
+                child: Text(
+                  product!.title,
+                  style: TextStyle(color: Colors.black),
+                  maxLines: 2,
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "\$${product!.quickSellPrice}",
-                    style: TextStyle(
-                      fontSize: getProportionateScreenWidth(18),
-                      fontWeight: FontWeight.w600,
-                      color: kPrimaryColor,
-                    ),
-                  ),
-                  InkWell(
-                    borderRadius: BorderRadius.circular(50),
-                    onTap: () {},
-                    child: Container(
-                      padding: EdgeInsets.all(getProportionateScreenWidth(8)),
-                      height: getProportionateScreenWidth(28),
-                      width: getProportionateScreenWidth(28),
-                      decoration: BoxDecoration(
+              Flexible(
+                flex: 4,
+                child: Padding(
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(20)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "₹${product!.quickSellPrice}",
+                        style: TextStyle(
+                          fontSize: getProportionateScreenWidth(18),
+                          fontWeight: FontWeight.w600,
+                          color: kPrimaryColor,
+                        ),
+                      ),
+                      IconButton(
                         color: isLiked()
                             ? kPrimaryColor.withOpacity(0.15)
                             : kSecondaryColor.withOpacity(0.1),
-                        shape: BoxShape.circle,
+                        icon: Icon(
+                          isLiked() ? Icons.favorite : Icons.favorite_outline,
+                          color:
+                              isLiked() ? Color(0xFFFF4848) : Color(0xFFDBDEE4),
+                        ),
+                        onPressed: likeUnlike,
                       ),
-                      child: Icon(
-                        isLiked() ? Icons.favorite : Icons.favorite_outline,
-                        color:
-                            isLiked() ? Color(0xFFFF4848) : Color(0xFFDBDEE4),
-                      ),
-                    ),
+                    ],
                   ),
-                ],
-              )
+                ),
+              ),
             ],
           ),
         ),

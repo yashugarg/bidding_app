@@ -1,14 +1,18 @@
+import 'package:bidding_app/screens/account/addNewProduct.dart';
+import 'package:bidding_app/screens/account/editUserProfile.dart';
 import 'package:bidding_app/screens/account/helpCenter.dart';
 import 'package:bidding_app/screens/account/helpCenter/aboutUs.dart';
 import 'package:bidding_app/screens/account/helpCenter/contactUs.dart';
 import 'package:bidding_app/screens/account/helpCenter/faqs.dart';
 import 'package:bidding_app/screens/account/myProducts.dart';
+import 'package:bidding_app/screens/account/orderHistory.dart';
+import 'package:bidding_app/screens/account/viewProfile.dart';
 import 'package:bidding_app/screens/auth/forgotPassword.dart';
 import 'package:bidding_app/screens/auth/login.dart';
 import 'package:bidding_app/screens/auth/signUp.dart';
 import 'package:bidding_app/screens/favorites.dart';
 import 'package:bidding_app/screens/home/homepage.dart';
-import 'package:bidding_app/screens/account/account.dart';
+import 'package:bidding_app/screens/account.dart';
 import 'package:bidding_app/services/auth.dart';
 import 'package:bidding_app/utils/routing/RoutingUtils.dart';
 import 'package:bidding_app/widgets/internetCheck.dart';
@@ -70,14 +74,18 @@ class Router {
           //account
           case Routes.myProducts:
             return routify(MyProducts());
+          case Routes.newProduct:
+            return routify(AddNewProduct());
+          case Routes.orderHistory:
+            return routify(MyOrders());
           case Routes.helpCenter:
             return routify(HelpCenter());
 
           //profile
-          // case Routes.viewProfile:
-          //   return routify(ViewUserProfile());
-          // case Routes.editProfile:
-          //   return routify(EditUserProfile());
+          case Routes.viewProfile:
+            return routify(Profile());
+          case Routes.editProfile:
+            return routify(EditUserProfile());
 
           //help center
           case Routes.aboutUs:

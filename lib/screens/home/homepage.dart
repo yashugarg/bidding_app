@@ -27,26 +27,28 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: SizeConfig.screenWidth * 0.6,
-                      decoration: BoxDecoration(
-                        color: kSecondaryColor.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: TextField(
-                        onChanged: (value) => print(value),
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: getProportionateScreenWidth(20),
-                                vertical: getProportionateScreenWidth(9)),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            hintText: "Search product",
-                            prefixIcon: Icon(Icons.search)),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: kSecondaryColor.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: TextField(
+                          onChanged: (value) => print(value),
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: getProportionateScreenWidth(20),
+                                  vertical: getProportionateScreenWidth(9)),
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              hintText: "Search product",
+                              prefixIcon: Icon(Icons.search)),
+                        ),
                       ),
                     ),
-                    IconButton(icon: Icon(Icons.notifications), onPressed: null),
+                    IconButton(
+                        icon: Icon(Icons.notifications), onPressed: null),
                   ],
                 ),
               ),

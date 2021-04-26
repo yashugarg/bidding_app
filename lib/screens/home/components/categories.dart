@@ -1,3 +1,4 @@
+import 'package:bidding_app/utils/constants.dart';
 import 'package:bidding_app/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,11 +7,11 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> categories = [
-      {"icon": "assets/icons/Flash Icon.svg", "text": "Flash Deal"},
-      {"icon": "assets/icons/Bill Icon.svg", "text": "Bill"},
-      {"icon": "assets/icons/Game Icon.svg", "text": "Game"},
-      {"icon": "assets/icons/Gift Icon.svg", "text": "Daily Gift"},
-      {"icon": "assets/icons/Discover.svg", "text": "More"},
+      {"icon": "assets/icons/Fashion.svg", "text": "Fashion"},
+      {"icon": "assets/icons/Electronics.svg", "text": "Electronics"},
+      {"icon": "assets/icons/Gift Icon.svg", "text": "Collectibles"},
+      {"icon": "assets/icons/Handbag.svg", "text": "Handbags"},
+      {"icon": "assets/icons/Watch.svg", "text": "Watches"},
     ];
     return Padding(
       padding: EdgeInsets.all(getProportionateScreenWidth(20)),
@@ -57,10 +58,15 @@ class CategoryCard extends StatelessWidget {
                 color: Color(0xFFFFECDF),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: SvgPicture.asset(icon),
+              child: SvgPicture.asset(
+                icon,
+                color: kPrimaryColor,
+              ),
             ),
             SizedBox(height: 5),
-            Text(text, textAlign: TextAlign.center)
+            FittedBox(
+              child: Text(text, textAlign: TextAlign.center),
+            ),
           ],
         ),
       ),

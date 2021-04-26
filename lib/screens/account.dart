@@ -63,40 +63,33 @@ class _AccountState extends State<Account> {
         title: Text("Account"),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(vertical: 20),
+        padding: EdgeInsets.only(bottom: 20),
         child: Column(
           children: [
-            SizedBox(
-              height: 115,
-              width: 115,
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Provider.of<AppUser>(context).photoUrl != null
-                        ? SvgPicture.network(
-                            Provider.of<AppUser>(context).photoUrl!,
-                            width: 100,
-                            fit: BoxFit.fill,
-                          )
-                        : Icon(
-                            Icons.account_circle_outlined,
-                            size: 100,
-                          ),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    Provider.of<AppUser>(context).displayName ?? "",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ],
+            CircleAvatar(
+              backgroundColor: Colors.white,
+              radius: 50,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: SizedBox.expand(
+                  child: Provider.of<AppUser>(context).photoUrl != null
+                      ? SvgPicture.network(
+                          Provider.of<AppUser>(context).photoUrl!,
+                        )
+                      : Icon(Icons.account_circle_outlined),
+                ),
               ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              Provider.of<AppUser>(context).displayName ?? "",
+              style: TextStyle(fontSize: 20),
             ),
             SizedBox(height: 10),
             AccountMenu(
               text: "My Profile",
               icon: Icons.person_outline_rounded,
-              press: () {},
+              press: () => Navigator.pushNamed(context, Routes.viewProfile),
             ),
             AccountMenu(
               text: "My Products",
@@ -106,7 +99,7 @@ class _AccountState extends State<Account> {
             AccountMenu(
               text: "Order History",
               icon: Icons.history,
-              press: () {},
+              press: () => Navigator.pushNamed(context, Routes.orderHistory),
             ),
             AccountMenu(
               text: "Notifications",
