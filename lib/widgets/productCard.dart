@@ -33,8 +33,10 @@ class _ProductCardState extends State<ProductCard> {
     super.didUpdateWidget(oldWidget);
   }
 
-  bool isLiked() => (product!.likes).contains(context.watch<AppUser>().id);
-  bool isLiked2() => (product!.likes).contains(context.read<AppUser>().id);
+  bool isLiked() =>
+      (product?.likes ?? []).contains(context.watch<AppUser>().id);
+  bool isLiked2() =>
+      (product?.likes ?? []).contains(context.read<AppUser>().id);
   likeUnlike() async {
     if (isLiked2()) {
       await ProductDBServices(uid: context.read<AppUser>().id)
@@ -87,7 +89,7 @@ class _ProductCardState extends State<ProductCard> {
               Flexible(
                 flex: 3,
                 child: Text(
-                  product!.title,
+                  product?.title ?? "",
                   style: TextStyle(color: Colors.black),
                   maxLines: 2,
                 ),
@@ -101,7 +103,7 @@ class _ProductCardState extends State<ProductCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "₹${product!.quickSellPrice.toInt()}",
+                        "₹${product!.quickSellPrice}",
                         style: TextStyle(
                           fontSize: getProportionateScreenWidth(18),
                           fontWeight: FontWeight.w600,

@@ -38,7 +38,15 @@ class _AddNewProductState extends State<AddNewProduct> {
 
   Map<String, List<String>> categoryList = {
     'Fashion': ["Clothing", "Accessories", "Shoes"],
-    'Electronics': ["Mobiles","Mobile Accessories", "Headphones", "Speakers", "Cameras", "Gaming Consoles", "Household Appliances"],
+    'Electronics': [
+      "Mobiles",
+      "Mobile Accessories",
+      "Headphones",
+      "Speakers",
+      "Cameras",
+      "Gaming Consoles",
+      "Household Appliances"
+    ],
     'Collectibles': ["Stamps", "Antiques", "Comics", "Coins", "Toys"],
     'Handbags': ["Leather Bag", "Satchel Bag", "Shoulder Bag", "Saddle Bag"],
     'Watches': ["Analog", "Digital"],
@@ -59,9 +67,9 @@ class _AddNewProductState extends State<AddNewProduct> {
         compressQuality: 80,
         androidUiSettings: AndroidUiSettings(
           hideBottomControls: true,
-          toolbarColor: Color(0xFFFFA53E),
-          cropGridColor: Color(0xFFFFA53E),
-          cropFrameColor: Color(0xFFFFA53E),
+          toolbarColor: kAccentColor,
+          cropGridColor: kAccentColor,
+          cropFrameColor: kAccentColor,
           toolbarWidgetColor: Colors.white,
           dimmedLayerColor: Colors.white,
         ),
@@ -75,8 +83,8 @@ class _AddNewProductState extends State<AddNewProduct> {
             SnackBar(content: Text("This image can not be used")));
       }
     } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Something went wrong")));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Something went wrong")));
     }
   }
 
@@ -91,8 +99,8 @@ class _AddNewProductState extends State<AddNewProduct> {
         condition: condition,
         quickSellPrice: double.parse(quickSellController.text),
         isUpForBidding: isUpForBidding,
-        minimumBid: double.parse(minimumBidController.text),
-        biddingTime: biddingTime,
+        minimumBid: double.tryParse(minimumBidController.text) ?? null,
+        biddingTime: isUpForBidding ? biddingTime : null,
         images: images,
         isActive: true,
       );

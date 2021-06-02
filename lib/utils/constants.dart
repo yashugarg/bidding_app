@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bidding_app/utils/size_config.dart';
 
 const kPrimaryColor = Color(0xFFFF7643);
+const kAccentColor = Color(0xFFFFA53E);
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,

@@ -1,3 +1,4 @@
+import 'package:bidding_app/models/product.dart';
 import 'package:bidding_app/screens/account/addNewProduct.dart';
 import 'package:bidding_app/screens/account/editUserProfile.dart';
 import 'package:bidding_app/screens/account/helpCenter.dart';
@@ -13,6 +14,7 @@ import 'package:bidding_app/screens/auth/signUp.dart';
 import 'package:bidding_app/screens/favorites.dart';
 import 'package:bidding_app/screens/product/allPopularProducts.dart';
 import 'package:bidding_app/screens/home/homepage.dart';
+import 'package:bidding_app/screens/product/bids.dart';
 import 'package:bidding_app/screens/product/productDetails.dart';
 import 'package:bidding_app/screens/account.dart';
 import 'package:bidding_app/services/auth.dart';
@@ -113,6 +115,24 @@ class Router {
             }
           case Routes.popularProducts:
             return routify(AllPopularProducts());
+
+          // order
+          case Routes.bidding:
+            if (settings.arguments is Product) {
+              return routify(ProductBids(
+                product: settings.arguments as Product,
+              ));
+            } else {
+              return routify(wrong);
+            }
+          case Routes.orderDetails:
+            // if (settings.arguments is String) {
+            //   return routify(OrderDetails(
+            //     oId: settings.arguments as String,
+            //   ));
+            // } else {
+              return routify(wrong);
+            // }
 
           // Paste new routes above this
           default:

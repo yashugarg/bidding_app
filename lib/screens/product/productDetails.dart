@@ -1,7 +1,9 @@
 import 'package:bidding_app/models/product.dart';
 import 'package:bidding_app/models/user.dart';
+import 'package:bidding_app/services/orderDbService.dart';
 import 'package:bidding_app/services/productDbService.dart';
 import 'package:bidding_app/utils/constants.dart';
+import 'package:bidding_app/utils/routing/RoutingUtils.dart';
 import 'package:bidding_app/utils/size_config.dart';
 import 'package:bidding_app/widgets/commonUI/defaultButton.dart';
 import 'package:flutter/material.dart';
@@ -127,7 +129,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           padding: EdgeInsets.symmetric(
                               horizontal: getProportionateScreenWidth(20)),
                           child: Text(
-                            product!.category!,
+                            product?.category ?? "",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: kPrimaryColor),
@@ -214,14 +216,17 @@ class _ProductDetailsState extends State<ProductDetails> {
               DefaultButton(
                 width: SizeConfig.screenWidth / 3,
                 text: "Quick Buy",
-                press: () {},
+                press: () async {
+                  await OrderDBServices(uid: context.read<AppUser>().id)
+                      .makeOrder(
+                          product: product!, price: product!.quickSellPrice);
+                },
               ),
-              product!.isUpForBidding
+              product?.isUpForBidding ?? false
                   ? DefaultButton(
                       width: SizeConfig.screenWidth / 3,
                       text: "Bidding",
-                      press: () {},
-                    )
+                      press: () => Navigator.pushNamed(context, Routes.bidding, arguments: product))
                   : Container(),
             ],
           ),

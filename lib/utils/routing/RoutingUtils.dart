@@ -31,6 +31,10 @@ class Routes {
   static const String productDetails = 'productDetails';
   static const String popularProducts = 'popularProduct';
 
+  //order
+  static const String bidding = 'bidding';
+  static const String orderDetails = 'orderDetails';
+
   //account
   static const String myProducts = 'myProducts';
   static const String orderHistory = 'orderHistory';

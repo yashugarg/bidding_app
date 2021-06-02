@@ -124,7 +124,7 @@ class ProductDBServices {
             event.docs.map<Product>((d) => Product.fromDocument(d)).toList());
   }
 
-  Future removePost(String id) async {
+  Future removeProduct(String id) async {
     return productsRef.doc(id).delete();
   }
 }

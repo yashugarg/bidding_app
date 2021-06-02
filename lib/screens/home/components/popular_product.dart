@@ -42,12 +42,14 @@ class PopularProducts extends StatelessWidget {
           builder: (context, value) {
             return SizedBox(
               height: 170,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: value!.length > 4 ? 4 : value.length,
-                itemBuilder: (context, index) =>
-                    ProductCard(product: value[index]),
-              ),
+              child: value != null
+                  ? ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: value.length > 4 ? 4 : value.length,
+                      itemBuilder: (context, index) =>
+                          ProductCard(product: value[index]),
+                    )
+                  : Center(child: Text("No Popular Products")),
             );
           },
         ),
