@@ -155,7 +155,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                       ],
                     )
                   : Container(
-                      height: getProportionateScreenHeight(100),
+                      height: getProportionateScreenHeight(20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.grey,
@@ -320,7 +320,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                     style: _ktextFieldStyle,
                     decoration: _myInputDecoration(
                       hintText: 'Enter Minimum Bid',
-                      labelText: "Minimum Bid",
+                      labelText: "Minimum Bid (*)",
                     ),
                   ),
                 ),
@@ -375,8 +375,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                   onPressed: () {
                     if (_formKey.currentState!.validate() &&
                         (isUpForBidding ? biddingTime != null : true) &&
-                        category != null &&
-                        condition != null) {
+                        category != null) {
                       updateInfo();
                     }
                   },

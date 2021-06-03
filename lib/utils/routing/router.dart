@@ -14,7 +14,7 @@ import 'package:bidding_app/screens/auth/signUp.dart';
 import 'package:bidding_app/screens/favorites.dart';
 import 'package:bidding_app/screens/product/allPopularProducts.dart';
 import 'package:bidding_app/screens/home/homepage.dart';
-import 'package:bidding_app/screens/product/bids.dart';
+import 'package:bidding_app/screens/product/bidsScreen.dart';
 import 'package:bidding_app/screens/product/productDetails.dart';
 import 'package:bidding_app/screens/account.dart';
 import 'package:bidding_app/services/auth.dart';

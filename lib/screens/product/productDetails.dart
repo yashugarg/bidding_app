@@ -206,32 +206,40 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ],
               ),
             ),
-      bottomNavigationBar: TopRoundedContainer(
-        color: Color(0xFFF6F7F9),
-        child: Padding(
-          padding: EdgeInsets.all(getProportionateScreenWidth(10)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              DefaultButton(
-                width: SizeConfig.screenWidth / 3,
-                text: "Quick Buy",
-                press: () async {
-                  await OrderDBServices(uid: context.read<AppUser>().id)
-                      .makeOrder(
-                          product: product!, price: product!.quickSellPrice);
-                },
-              ),
-              product?.isUpForBidding ?? false
-                  ? DefaultButton(
-                      width: SizeConfig.screenWidth / 3,
-                      text: "Bidding",
-                      press: () => Navigator.pushNamed(context, Routes.bidding, arguments: product))
-                  : Container(),
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar: product != null
+          ? product?.userID != context.watch<AppUser>().id
+              ? TopRoundedContainer(
+                  color: Color(0xFFF6F7F9),
+                  child: Padding(
+                    padding: EdgeInsets.all(getProportionateScreenWidth(10)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        DefaultButton(
+                          width: SizeConfig.screenWidth / 3,
+                          text: "Quick Buy",
+                          press: () async {
+                            await OrderDBServices(
+                                    uid: context.read<AppUser>().id)
+                                .makeOrder(
+                                    product: product!,
+                                    price: product!.quickSellPrice);
+                          },
+                        ),
+                        product?.isUpForBidding ?? false
+                            ? DefaultButton(
+                                width: SizeConfig.screenWidth / 3,
+                                text: "Bidding",
+                                press: () => Navigator.pushNamed(
+                                    context, Routes.bidding,
+                                    arguments: product))
+                            : Container(),
+                      ],
+                    ),
+                  ),
+                )
+              : Container()
+          : Container(),
     );
   }
 }

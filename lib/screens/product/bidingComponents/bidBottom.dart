@@ -20,14 +20,130 @@ class BidBottom extends StatefulWidget {
 class _BidBottomState extends State<BidBottom> {
   final textController = TextEditingController();
   bool timer = false;
+
   Future<void> addBid(AppUser user) async {
+    DateTime? time = widget.product.biddingTime;
     final String bid = textController.text;
     textController.clear();
 
-    await OrderDBServices(uid: user.id).addNewBid(
-      pId: widget.product.id,
-      value: bid,
-    );
+    if (time != null) {
+      if (DateTime.now().isAfter(time) &&
+          DateTime.now().isBefore(time.add(const Duration(days: 1)))) {
+        if (widget.product.minimumBid! < (double.tryParse(bid.trim()) ?? 0)) {
+          bool confirm = false;
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("Confirm"),
+                content: Text(
+                    "You are going to bid ${bid.trim()} on ${widget.product.title}"),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text("Cancel Bid"),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      confirm = true;
+                      Navigator.pop(context);
+                    },
+                    child: Text("Confirm"),
+                  ),
+                ],
+              );
+            },
+          ).then((value) {
+            if (confirm) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("Place your Bid!"),
+                    content: Text(
+                        "Confirm your bid of ${bid.trim()} on ${widget.product.title}"),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: Text("Cancel Bid"),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          await OrderDBServices(uid: user.id)
+                              .addNewBid(
+                                pId: widget.product.id,
+                                value: bid,
+                              )
+                              .onError(
+                                (error, stackTrace) => showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text("Error"),
+                                      content: Text(
+                                          "Something went wrong, please try again!"),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          child: Text("OKAY"),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              )
+                              .whenComplete(() => Navigator.pop(context));
+                        },
+                        child: Text("Confirm"),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+          });
+        } else {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("Place a higher bid!"),
+                content: Text(
+                    "You need to place a bid higher than ${widget.product.minimumBid}"),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text("OKAY"),
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Confirm"),
+              content: Text("Auction for this product is now over"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  child: Text("OKAY"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } else {
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -50,7 +166,9 @@ class _BidBottomState extends State<BidBottom> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          boxShadow: [BoxShadow(blurRadius: 10, color: Colors.grey[300]!)],
+          boxShadow: [
+            BoxShadow(blurRadius: 10, color: Colors.grey[300] ?? Colors.grey)
+          ],
           color: Colors.white,
         ),
         // height: 60.0,
