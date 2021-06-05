@@ -16,7 +16,7 @@ class OrderDBServices {
 
   Future makeOrder({
     required Product product,
-    required double price,
+    required num price,
   }) async {
     Order order = Order(
         userID: uid!,
@@ -30,6 +30,11 @@ class OrderDBServices {
         publishedAt: DateTime.now());
     await userRef.doc(uid).collection('orders').add(order.toMap());
     await productsRef.doc(product.id).delete();
+  }
+
+  Future<Order> getOneOrder(String oId) async {
+    DocumentSnapshot snapshot = await userRef.doc(uid).collection('orders').doc(oId).get();
+    return Order.fromDocument(snapshot);
   }
 
   Stream<List<Order>> fetchMyOrders() {

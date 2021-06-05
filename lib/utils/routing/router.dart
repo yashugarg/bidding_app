@@ -12,6 +12,8 @@ import 'package:bidding_app/screens/auth/forgotPassword.dart';
 import 'package:bidding_app/screens/auth/login.dart';
 import 'package:bidding_app/screens/auth/signUp.dart';
 import 'package:bidding_app/screens/favorites.dart';
+import 'package:bidding_app/screens/order/checkout.dart';
+import 'package:bidding_app/screens/order/orderDetails.dart';
 import 'package:bidding_app/screens/product/allPopularProducts.dart';
 import 'package:bidding_app/screens/home/homepage.dart';
 import 'package:bidding_app/screens/product/bidsScreen.dart';
@@ -125,14 +127,22 @@ class Router {
             } else {
               return routify(wrong);
             }
-          case Routes.orderDetails:
-            // if (settings.arguments is String) {
-            //   return routify(OrderDetails(
-            //     oId: settings.arguments as String,
-            //   ));
-            // } else {
+          case Routes.checkout:
+            if (settings.arguments is Map) {
+              Map args = settings.arguments as Map;
+              return routify(
+                  Checkout(amount: args["amount"], product: args["product"]));
+            } else {
               return routify(wrong);
-            // }
+            }
+          case Routes.orderDetails:
+            if (settings.arguments is String) {
+              return routify(OrderDetails(
+                oId: settings.arguments as String,
+              ));
+            } else {
+              return routify(wrong);
+            }
 
           // Paste new routes above this
           default:

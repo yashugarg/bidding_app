@@ -33,6 +33,7 @@ class Routes {
 
   //order
   static const String bidding = 'bidding';
+  static const String checkout = 'checkout';
   static const String orderDetails = 'orderDetails';
 
   //account

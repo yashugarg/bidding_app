@@ -8,9 +8,9 @@ class Product {
   final String? category;
   final String? subcategory;
   final String condition;
-  final double quickSellPrice;
+  final num quickSellPrice;
   final bool isUpForBidding;
-  final double? minimumBid;
+  final num? minimumBid;
   final DateTime? biddingTime;
   final List<String> images;
   final List<String> likes;

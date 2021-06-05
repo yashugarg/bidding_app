@@ -217,19 +217,19 @@ class _ProductDetailsState extends State<ProductDetails> {
                       children: [
                         DefaultButton(
                           width: SizeConfig.screenWidth / 3,
-                          text: "Quick Buy",
-                          press: () async {
-                            await OrderDBServices(
-                                    uid: context.read<AppUser>().id)
-                                .makeOrder(
-                                    product: product!,
-                                    price: product!.quickSellPrice);
+                          text: "Quick Buy \n ₹${product?.quickSellPrice ?? 0}",
+                          press: () {
+                            Navigator.pushNamed(context, Routes.checkout,
+                                arguments: {
+                                  "amount": product?.quickSellPrice,
+                                  "product": product
+                                });
                           },
                         ),
                         product?.isUpForBidding ?? false
                             ? DefaultButton(
                                 width: SizeConfig.screenWidth / 3,
-                                text: "Bidding",
+                                text: "Auction",
                                 press: () => Navigator.pushNamed(
                                     context, Routes.bidding,
                                     arguments: product))

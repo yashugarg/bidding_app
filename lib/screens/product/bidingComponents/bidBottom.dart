@@ -29,7 +29,7 @@ class _BidBottomState extends State<BidBottom> {
     if (time != null) {
       if (DateTime.now().isAfter(time) &&
           DateTime.now().isBefore(time.add(const Duration(days: 1)))) {
-        if (widget.product.minimumBid! < (double.tryParse(bid.trim()) ?? 0)) {
+        if (widget.product.minimumBid! < (num.tryParse(bid.trim()) ?? 0)) {
           bool confirm = false;
           showDialog(
             context: context,

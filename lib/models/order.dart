@@ -8,7 +8,7 @@ class Order {
   final String? category;
   final String? subcategory;
   final String condition;
-  final double price;
+  final num price;
   final List<String> images;
   final DateTime publishedAt;
 
