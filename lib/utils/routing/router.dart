@@ -106,7 +106,12 @@ class Router {
 
           // product
           case Routes.newProduct:
-            return routify(AddNewProduct());
+            if (settings.arguments is Product)
+              return routify(AddNewProduct(
+                product: settings.arguments as Product,
+              ));
+            else
+              return routify(AddNewProduct());
           case Routes.productDetails:
             if (settings.arguments is String) {
               return routify(ProductDetails(

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bidding_app/models/product.dart';
 import 'package:bidding_app/utils/size_config.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:bidding_app/models/user.dart';
@@ -14,6 +15,8 @@ import 'package:provider/provider.dart';
 const _ktextFieldStyle = TextStyle(fontSize: 14);
 
 class AddNewProduct extends StatefulWidget {
+  AddNewProduct({this.product});
+  Product? product;
   @override
   _AddNewProductState createState() => _AddNewProductState();
 }
@@ -53,8 +56,24 @@ class _AddNewProductState extends State<AddNewProduct> {
     'Others': []
   };
 
+  init() {
+    Product? prod = widget.product;
+    if (prod != null) {
+      setState(() {
+        biddingTime = prod.biddingTime;
+        category = prod.category;
+        subcategory = prod.subcategory;
+        condition = prod.condition;
+        descriptionTextController.text = prod.description;
+        quickSellController.text = "${prod.quickSellPrice}";
+        titleTextController.text = prod.title;
+      });
+    }
+  }
+
   @override
   void initState() {
+    if (widget.product != null) init();
     super.initState();
   }
 
@@ -113,6 +132,8 @@ class _AddNewProductState extends State<AddNewProduct> {
 
   @override
   Widget build(BuildContext context) {
+    print("/////////////////////////////////////////////////");
+    print(images);
     return Scaffold(
       appBar: AppBar(
         title: Text("Add New Product"),
@@ -123,7 +144,7 @@ class _AddNewProductState extends State<AddNewProduct> {
           padding: const EdgeInsets.symmetric(vertical: 10.0),
           child: ListView(
             children: <Widget>[
-              images != []
+              images.length != 0
                   ? Column(
                       children: [
                         CarouselSlider(
@@ -155,11 +176,12 @@ class _AddNewProductState extends State<AddNewProduct> {
                       ],
                     )
                   : Container(
-                      height: getProportionateScreenHeight(20),
+                      height: getProportionateScreenHeight(100),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.grey,
                       ),
+                      child: Center(child: Text("Add Image")),
                     ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -403,14 +425,14 @@ class _AddNewProductState extends State<AddNewProduct> {
 }
 
 class EditDetail extends StatelessWidget {
-  final Widget? child;
-  EditDetail({this.child});
+  final Widget child;
+  EditDetail({required this.child});
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: ListTile(
-        shape: RoundedRectangleBorder(),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         tileColor: Color(0xFFF2F7FB),
         contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
         title: Row(
@@ -418,7 +440,7 @@ class EditDetail extends StatelessWidget {
           textBaseline: TextBaseline.alphabetic,
           children: [
             Expanded(
-              child: child!,
+              child: child,
             ),
           ],
         ),

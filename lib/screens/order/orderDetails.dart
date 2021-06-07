@@ -1,7 +1,9 @@
 import 'package:bidding_app/models/order.dart';
+import 'package:bidding_app/models/product.dart';
 import 'package:bidding_app/models/user.dart';
 import 'package:bidding_app/services/orderDbService.dart';
 import 'package:bidding_app/utils/constants.dart';
+import 'package:bidding_app/utils/routing/RoutingUtils.dart';
 import 'package:bidding_app/utils/size_config.dart';
 import 'package:bidding_app/widgets/commonUI/AppStreamBuilder.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,9 @@ class _OrderDetailsState extends State<OrderDetails> {
         title: Text("Order Detail"),
       ),
       body: StrmBldr<Order>(
-        stream: OrderDBServices(uid: context.watch<AppUser>().id).getOneOrder(widget.oId).asStream(),
+        stream: OrderDBServices(uid: context.watch<AppUser>().id)
+            .getOneOrder(widget.oId)
+            .asStream(),
         builder: (context, order) {
           return SingleChildScrollView(
             child: Column(
@@ -103,7 +107,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: getProportionateScreenWidth(20)),
                               child: Text(
-                                order.subcategory??"",
+                                order.subcategory ?? "",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -148,6 +152,47 @@ class _OrderDetailsState extends State<OrderDetails> {
                     ],
                   ),
                 ),
+                Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Resell",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              Routes.newProduct,
+                              arguments: Product(
+                                userID: order.userID,
+                                title: order.title,
+                                description: order.description,
+                                category: order.category,
+                                subcategory: order.subcategory,
+                                condition: order.condition,
+                                quickSellPrice: order.price,
+                                isUpForBidding: false,
+                                isActive: false,
+                                isVerified: false,
+                                images: order.images,
+                                likes: [],
+                                publishedAt: DateTime.now(),
+                                updatedAt: DateTime.now(),
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.sell),
+                        ),
+                      ],
+                    ))
               ],
             ),
           );
